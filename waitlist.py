@@ -26,7 +26,6 @@ driver.find_element_by_name('Submit').click()
 
 drop_down = driver.find_element_by_id('DERIVED_SSS_SCL_SSS_MORE_ACADEMICS')
 element = driver.find_element_by_id('DERIVED_SSS_SCL_SSS_GO_1');
-value = driver.find_element_by_xpath("//select[@id='DERIVED_SSS_SCL_SSS_MORE_ACADEMICS']/option[@value='1002']")
 actions = ActionChains(driver)
 actions.move_to_element(drop_down)
 actions.click(drop_down)
