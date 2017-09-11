@@ -10,9 +10,6 @@ from selenium.common.exceptions import NoSuchElementException
 driver = webdriver.Firefox()
 driver.get("https://www.go.sfu.ca")
 
-username_input = input("Enter your username: ")
-password_input = input("Enter your password: ")
-
 driver.implicitly_wait(10)
 
 username = driver.find_element_by_id('user')
@@ -21,8 +18,8 @@ password = driver.find_element_by_id('pwd')
 username.clear()
 password.clear()
 
-username.send_keys(username_input)
-password.send_keys(password_input)
+username.send_keys("")
+password.send_keys("")
 
 driver.find_element_by_name('Submit').click()
 
@@ -51,12 +48,13 @@ driver.switch_to.frame(iframe)
 
 waitlists = []
 
-for i in range(0,10):
+for i in range(10):
 	try:
-		waitlists.append(int(driver.find_element_by_css_selector('#DERIVED_SSE_DSP_WAITLIST_POS\${}'.format(str(i))).text))
+		waitlists.append([int(driver.find_element_by_css_selector('#DERIVED_SSE_DSP_WAITLIST_POS\${}'.format(str(i))).text),
+						driver.find_element_by_id('DERIVED_SSE_DSP_CLASS_DESCR$span${}'.format(str(i))).text,
+						driver.find_element_by_id('PSXLATITEM_XLATSHORTNAME$56$${}'.format(str(i))).text])
 
 	except NoSuchElementException:
 		continue
 
-
-
+print(waitlists)

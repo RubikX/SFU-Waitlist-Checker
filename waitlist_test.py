@@ -1,4 +1,5 @@
 # Author: Edison Suen
+
 import unittest
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -22,8 +23,8 @@ class waitlist(unittest.TestCase):
 		username.clear()
 		password.clear()
 
-		username.send_keys("ENTER USERNAME")
-		password.send_keys("ENTER PASSWORD")
+		username.send_keys("")
+		password.send_keys("")
 
 		driver.find_element_by_name('Submit').click()
 		driver.implicitly_wait(10)
@@ -56,10 +57,11 @@ class waitlist(unittest.TestCase):
 
 		for i in range(0,10):
 			try:
-				waitlists.append(int(driver.find_element_by_css_selector('#DERIVED_SSE_DSP_WAITLIST_POS\${}'.format(str(i))).text))
-
-			except NoSuchElementException:
-				continue
+				waitlists.append([int(driver.find_element_by_css_selector('#DERIVED_SSE_DSP_WAITLIST_POS\${}'.format(str(i))).text),
+								driver.find_element_by_id('DERIVED_SSE_DSP_CLASS_DESCR$span${}'.format(str(i))).text,
+								driver.find_element_by_id('PSXLATITEM_XLATSHORTNAME$56$${}'.format(str(i))).text])
+					except NoSuchElementException:
+						continue
 
 	def tearDown(self):
 		self.driver.close()
