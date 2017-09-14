@@ -1,2 +1,2 @@
 # SFU-Waitlist-Checker
-This script emails you whenever your position on the waitlist of a course changes.
+This script checks your position on the waitlist of a course.
